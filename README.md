@@ -1,68 +1,68 @@
-Symfony Standard Edition
-========================
-
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
-
-What's inside?
+Project Structure 
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+  * [**Business Model**] - electric bike brand with over 20 staff, with a local HQ and 
+  various distribution networks across the globe. Key requirement are highly customizable role
+  hierarchy control for the same products, which are distributed in different regions and by different channels. Able
+  to talk to factory APIs.
 
-  * An AppBundle you can use to start coding;
+  * [**Bundles**] - Popular bundles such as fos/sonata/nelmio are used for rapid prototyping, and some others
+  (doctrineextra/fosrest) are intentionally not used for demonstration. For example, the file/image uploading, helpers, 
+  security and most part of the api endpoints are handled manually. 
 
-  * Twig as the only configured template engine;
+  * [**Environment Setup**] -  A separate Testing environment can be accessed in console with '-e test' flag. A separate 
+  config file (config_bundles.yml) are created for third party libraries.
 
-  * Doctrine ORM/DBAL;
+  * [**Api Conventions**] - Follows basic IETF RFCs or drafts without Swagger. For example, hateoas with hal+json, token 
+  manual handling using RFC 7519 jwt.
 
-  * Swiftmailer;
+  * [**Tests**] - Codeception is used for managing/centralizing. Acceptance Tests are automated with Selenium WebDriver 
+  and Mozilla GeckoDriver. Api/Functional tests and Unit tests are also created based on BDD/TDD principles.
+  
 
-  * Annotations enabled for everything.
+Installation
+--------------
 
-It comes pre-configured with the following bundles:
+**1)** Use [Composer](https://getcomposer.org/).
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+**2)** Install the composer dependencies:
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+```bash
+composer install
+```
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+**3)** Load up database and fixtures:
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+Make sure `app/config/parameters.yml` is correct for your database
+credentials. Then:
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+```bash
+php app/console doctrine:database:create
+php app/console doctrine:migrations:migrate
+php app/console doctrine:fixtures:load
+```
+You also need to repeat the above for the **test environment** by appending the flag '-e test'. 
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+The test DB are populated by the Codeception DB module (automatically loading /tests/_data/dump.sql). 
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+**4)** Start up the built-in PHP web server:
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+```bash
+php app/console server:run
+```
 
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
+The site can be accessed at http://localhost:8000.
 
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+**5)** Make sure [Selenium WebDriver](http://www.seleniumhq.org/) and one of [Browser Drivers](http://www.seleniumhq.org/download/) 
+are installed for the Acceptance tests. 
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+Run all tests with:
 
-Enjoy!
+```bash
+bin/codecept run 
+```
 
-[1]:  https://symfony.com/doc/2.8/book/installation.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/book/doctrine.html
-[8]:  https://symfony.com/doc/2.8/book/templating.html
-[9]:  https://symfony.com/doc/2.8/book/security.html
-[10]: https://symfony.com/doc/2.8/cookbook/email.html
-[11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
-[13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
+Or run individual test suite by appending the suite flag such as 'api' or 'functional'. Details can be seen by using
+ '--steps' or '--debug'
+ 
