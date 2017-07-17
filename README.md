@@ -1,10 +1,11 @@
+
+
 Project Structure 
 --------------
 
-  * [**Business Model**] - electric bike brand with over 20 staff, with a local HQ and 
-  various distribution networks across the globe. Key requirement are highly customizable role
-  hierarchy control for the same products, which are distributed in different regions and by different channels. Able
-  to talk to factory APIs.
+  * [**Business Model**] - Caizcorp.com - a Optronic and Optoelectronics manufacturer with over 100 staff, with a local HQ and 
+  various distribution networks across the globe. Key requirement is highly customizable role
+  hierarchy control for the same products, which are distributed in different regions and by different channels. 
 
   * [**Bundles**] - Popular bundles such as fos/sonata/nelmio are used for rapid prototyping, and some others
   (doctrineextra/fosrest) are intentionally not used for demonstration. For example, the file/image uploading, helpers, 
@@ -65,4 +66,3 @@ bin/codecept run
 
 Or run individual test suite by appending the suite flag such as 'api' or 'functional'. Details can be seen by using
  '--steps' or '--debug'
- 
