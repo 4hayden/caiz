@@ -1,5 +1,4 @@
 
-
 Project Structure 
 --------------
 
@@ -21,8 +20,7 @@ Project Structure
   and Mozilla GeckoDriver. Api/Functional tests and Unit tests are also created based on BDD/TDD principles.
   
 
-Installation
---------------
+
 
 **1)** Use [Composer](https://getcomposer.org/).
 
@@ -66,3 +64,4 @@ bin/codecept run
 
 Or run individual test suite by appending the suite flag such as 'api' or 'functional'. Details can be seen by using
  '--steps' or '--debug'
+ 
